@@ -46,16 +46,14 @@ public class ApiBPJS {
             System.out.println("Notifikasi : "+ex);
         }
     }
-
-    public String getHmac(String utc) {               
-        salt = Consid +"&"+utc;
+    
+    public String getHmac(String utc) {
+        salt = Consid + "&" + utc;
 	generateHmacSHA256Signature = null;
 	try {
 	    generateHmacSHA256Signature = generateHmacSHA256Signature(salt,Key);
 	} catch (GeneralSecurityException e) {
-	    // TODO Auto-generated catch block
-            System.out.println("Error Signature : "+e);
-	    e.printStackTrace();
+            System.out.println("Error Signature : " + e);
 	}
 	return generateHmacSHA256Signature;
     }
@@ -77,6 +75,12 @@ public class ApiBPJS {
     public long GetUTCdatetimeAsString(){    
         millis = System.currentTimeMillis();   
         return millis/1000;
+    }
+    
+    public String getUTCDateTime() {
+        millis = System.currentTimeMillis();
+        
+        return String.valueOf(millis/1000);
     }
     
     public String Decrypt(String data,String utc)throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {

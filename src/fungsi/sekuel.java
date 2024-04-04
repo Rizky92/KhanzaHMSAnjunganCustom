@@ -28,10 +28,10 @@ import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.sql.Blob;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Connection;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -68,10 +68,72 @@ public final class sekuel {
         super();
     }
     
-    public void logTaskid(String noRawat, String jenisKunjungan, String taskid, String code, String message)
-    {
+    public boolean executeRawSmc(String sql, String... values) {
+        boolean sukses = true;
+        String track = sql;
+        try {
+            ps = connect.prepareStatement(sql);
+            try {
+                for (int i = 0; i < values.length; i++) {
+                    ps.setString(i + 1, values[i]);
+                    track = track.replaceFirst("\\?", "'" + values[i] + "'");
+                }
+                ps.executeUpdate();
+                SimpanTrack(track);
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                sukses = false;
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            sukses = false;
+        }
+        return sukses;
+    }
+
+    public String autoNomorSmc(String table, String kolom, int panjang, String pad, String tanggal) {
+        return autoNomorSmc("", "", table, kolom, panjang, pad, tanggal);
+    }
+
+    public String autoNomorSmc(String separator, String table, String kolom, int panjang, String pad, String tanggal) {
+        return autoNomorSmc("", separator, table, kolom, panjang, pad, tanggal);
+    }
+    
+    public String autoNomorSmc(String prefix, String separator, String table, String kolom, int panjang, String pad, String tanggal) {
+        String output = "", sql = "select "
+                + "concat(?, date_format(?, '%Y" + separator + "%m" + separator + "%d'), " + separator + ", "
+                + "lpad(ifnull(max(convert(right(" + table + "." + kolom + ", ?), signed)), 0) + 1, ?, ?)) "
+                + "from " + table + " "
+                + "where " + table + "." + kolom + " like concat(?, date_format(?, '%Y" + separator + "%m" + separator + "%d'), '%')";
+        try {
+            ps = connect.prepareStatement(sql);
+            try {
+                ps.setString(1, prefix);
+                ps.setString(2, tanggal);
+                ps.setInt(3, panjang);
+                ps.setInt(4, panjang);
+                ps.setString(5, pad);
+                ps.setString(6, prefix);
+                ps.setString(7, tanggal);
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    output = rs.getString(1);
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            } finally {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        return output;
+    }
+
+    public void logTaskid(String noRawat, String jenisKunjungan, String taskid, String code, String message) {
         String query = "insert into referensi_mobilejkn_bpjs_taskid_response (no_rawat, jenispasien, taskid, code, message, waktu) values (?, ?, ?, ?, ?, now())";
-        
+
         try {
             ps = connect.prepareStatement(query);
             try {
@@ -92,13 +154,13 @@ public final class sekuel {
             System.out.println("Notif : " + e);
         }
     }
-    
+
     public boolean cariBooleanSmc(String sql, String... values) {
         boolean output = false;
-        
+
         try {
             ps = connect.prepareStatement("select exists(" + sql + ")");
-            
+
             try {
                 for (int i = 0; i < values.length; i++) {
                     ps.setString(i + 1, values[i]);
@@ -115,7 +177,7 @@ public final class sekuel {
                 if (rs != null) {
                     rs.close();
                 }
-                
+
                 if (ps != null) {
                     ps.close();
                 }
@@ -123,16 +185,16 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
         }
-        
+
         return output;
     }
-    
+
     public String cariIsiSmc(String sql, String... values) {
         String output = "";
-        
+
         try {
             ps = connect.prepareStatement(sql);
-            
+
             try {
                 for (int i = 0; i < values.length; i++) {
                     ps.setString(i + 1, values[i]);
@@ -149,7 +211,7 @@ public final class sekuel {
                 if (rs != null) {
                     rs.close();
                 }
-                
+
                 if (ps != null) {
                     ps.close();
                 }
@@ -157,16 +219,16 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
         }
-        
+
         return output;
     }
-    
+
     public int cariIntegerSmc(String sql, String... values) {
         int output = 0;
-        
+
         try {
             ps = connect.prepareStatement(sql);
-            
+
             try {
                 for (int i = 0; i < values.length; i++) {
                     ps.setString(i + 1, values[i]);
@@ -183,7 +245,7 @@ public final class sekuel {
                 if (rs != null) {
                     rs.close();
                 }
-                
+
                 if (ps != null) {
                     ps.close();
                 }
@@ -191,56 +253,56 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
         }
-        
+
         return output;
     }
-    
+
     public boolean menyimpantfSmc(String table, String kolom, String... values) {
         try {
             simpanSMC(table, kolom, values);
-            
+
             return true;
         } catch (Exception e) {
             System.out.println("Terjadi kesalahan pada saat menyimpan data!");
             System.out.println("Notifikasi : " + e);
-            
+
             JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menyimpan data!");
-            
+
             return false;
         }
     }
-    
+
     public void menyimpanSmc(String table, String kolom, String... values) {
         try {
             simpanSMC(table, kolom, values);
         } catch (Exception e) {
             System.out.println("Terjadi kesalahan pada saat menyimpan data!");
             System.out.println("Notifikasi : " + e);
-            
+
             JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menyimpan data!");
         }
     }
-    
+
     private void simpanSMC(String table, String kolom, String[] values) throws SQLException {
-        
+
         String sql = "insert into " + table + " (" + kolom + ") values (";
         String bindings = "";
         String track;
-        
+
         if (kolom == null) {
             sql = "insert into " + table + " values (";
         }
-        
+
         for (String value : values) {
             bindings = bindings.concat("?, ");
         }
-        
+
         bindings = bindings
-            .concat(")")
-            .replaceFirst("\\?\\, \\)", "?)");
-        
+                .concat(")")
+                .replaceFirst("\\?\\, \\)", "?)");
+
         track = sql = sql.concat(bindings);
-        
+
         ps = connect.prepareStatement(sql);
 
         for (int i = 0; i < values.length; i++) {
@@ -252,25 +314,25 @@ public final class sekuel {
         if (ps != null) {
             ps.close();
         }
-        
+
         for (String value : values) {
             track = track.replaceFirst("\\?", "'" + value + "'");
         }
-        
+
         SimpanTrack(track);
     }
-    
+
     private void updateSMC(String table, String kolom, String kondisi, String[] values) throws SQLException {
-        
+
         String sql = "update " + table + " set " + kolom + " where " + kondisi;
         String track;
-        
+
         if (kondisi == null) {
             sql = "update " + table + " set ";
         }
-        
+
         track = sql;
-        
+
         ps = connect.prepareStatement(sql);
 
         for (int i = 0; i < values.length; i++) {
@@ -282,36 +344,36 @@ public final class sekuel {
         if (ps != null) {
             ps.close();
         }
-        
+
         for (String value : values) {
             track = track.replaceFirst("\\?", "'" + value + "'");
         }
-        
+
         SimpanTrack(track);
     }
-    
+
     public void mengupdateSmc(String table, String kolom, String kondisi, String... values) {
         try {
             updateSMC(table, kolom, kondisi, values);
         } catch (Exception e) {
             System.out.println("Terjadi kesalahan pada saat mengupdate data!");
             System.out.println("Notifikasi : " + e);
-            
+
             JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengupdate data!");
         }
     }
-    
+
     public boolean mengupdatetfSmc(String table, String kolom, String kondisi, String... values) {
         try {
             updateSMC(table, kolom, kondisi, values);
-            
+
             return true;
         } catch (Exception e) {
             System.out.println("Terjadi kesalahan pada saat mengupdate data!");
             System.out.println("Notifikasi : " + e);
-            
+
             JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengupdate data!");
-            
+
             return false;
         }
     }

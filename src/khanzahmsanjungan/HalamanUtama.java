@@ -19,16 +19,16 @@ import javax.swing.JOptionPane;
  *
  * @author it-rsib
  */
-public class HalamanUtamaDepan extends javax.swing.JFrame {
+public class HalamanUtama extends javax.swing.JFrame {
 
-    private static HalamanUtamaDepan myInstance;
+    private static HalamanUtama myInstance;
     private sekuel Sequel = new sekuel();
     private validasi Valid = new validasi();
 
     /**
      * Creates new form HalamanUtamaDepan
      */
-    public HalamanUtamaDepan() {
+    public HalamanUtama() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
         setIconImage(new ImageIcon(super.getClass().getResource("/picture/indriati48.png")).getImage());
@@ -125,9 +125,8 @@ public class HalamanUtamaDepan extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.GridLayout(0, 2));
 
         btnAdmin10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/antrianpasien.png"))); // NOI18N
-        btnAdmin10.setText("ANTRIAN PASIEN");
-        btnAdmin10.setEnabled(false);
-        btnAdmin10.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+        btnAdmin10.setText("AMBIL ANTRIAN");
+        btnAdmin10.setFont(new java.awt.Font("Inter Display", 1, 30)); // NOI18N
         btnAdmin10.setIconTextGap(0);
         btnAdmin10.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAdmin10.addActionListener(new java.awt.event.ActionListener() {
@@ -151,8 +150,8 @@ public class HalamanUtamaDepan extends javax.swing.JFrame {
         jPanel1.add(btnAdmin7);
 
         btnAdmin2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/kioskselfservice.png"))); // NOI18N
-        btnAdmin2.setText("PENDAFTARAN POLIKLINIK");
-        btnAdmin2.setFont(new java.awt.Font("Inter", 1, 30)); // NOI18N
+        btnAdmin2.setText("DAFTAR POLIKLINIK");
+        btnAdmin2.setFont(new java.awt.Font("Inter Display", 1, 30)); // NOI18N
         btnAdmin2.setIconTextGap(0);
         btnAdmin2.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAdmin2.addActionListener(new java.awt.event.ActionListener() {
@@ -164,7 +163,7 @@ public class HalamanUtamaDepan extends javax.swing.JFrame {
 
         btnAdmin5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/BPJS_Kesehatan_Logo.png"))); // NOI18N
         btnAdmin5.setText("SEP KUNJUNGAN PERTAMA");
-        btnAdmin5.setFont(new java.awt.Font("Inter", 1, 30)); // NOI18N
+        btnAdmin5.setFont(new java.awt.Font("Inter Display", 1, 30)); // NOI18N
         btnAdmin5.setIconTextGap(0);
         btnAdmin5.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAdmin5.addActionListener(new java.awt.event.ActionListener() {
@@ -176,7 +175,7 @@ public class HalamanUtamaDepan extends javax.swing.JFrame {
 
         btnAdmin6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/BPJS_Kesehatan_Logo.png"))); // NOI18N
         btnAdmin6.setText("SEP KONTROL");
-        btnAdmin6.setFont(new java.awt.Font("Inter", 1, 30)); // NOI18N
+        btnAdmin6.setFont(new java.awt.Font("Inter Display", 1, 30)); // NOI18N
         btnAdmin6.setIconTextGap(0);
         btnAdmin6.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAdmin6.addActionListener(new java.awt.event.ActionListener() {
@@ -187,8 +186,8 @@ public class HalamanUtamaDepan extends javax.swing.JFrame {
         jPanel1.add(btnAdmin6);
 
         btnAdmin9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/BPJS_Kesehatan_Logo.png"))); // NOI18N
-        btnAdmin9.setText("KONTROL BEDA POLI");
-        btnAdmin9.setFont(new java.awt.Font("Inter", 1, 30)); // NOI18N
+        btnAdmin9.setText("SEP KONTROL BEDA POLI");
+        btnAdmin9.setFont(new java.awt.Font("Inter Display", 1, 30)); // NOI18N
         btnAdmin9.setIconTextGap(0);
         btnAdmin9.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAdmin9.addActionListener(new java.awt.event.ActionListener() {
@@ -200,7 +199,7 @@ public class HalamanUtamaDepan extends javax.swing.JFrame {
 
         btnAdmin8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/mobilejkn48.png"))); // NOI18N
         btnAdmin8.setText("CEK IN MOBILEJKN");
-        btnAdmin8.setFont(new java.awt.Font("Inter", 1, 30)); // NOI18N
+        btnAdmin8.setFont(new java.awt.Font("Inter Display", 1, 30)); // NOI18N
         btnAdmin8.setIconTextGap(0);
         btnAdmin8.setPreferredSize(new java.awt.Dimension(200, 90));
         btnAdmin8.addActionListener(new java.awt.event.ActionListener() {
@@ -306,27 +305,28 @@ public class HalamanUtamaDepan extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HalamanUtamaDepan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HalamanUtama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HalamanUtamaDepan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HalamanUtama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HalamanUtamaDepan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HalamanUtama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HalamanUtamaDepan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HalamanUtama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HalamanUtamaDepan().setVisible(true);
+                new HalamanUtama().setVisible(true);
             }
         });
     }
 
-    public static HalamanUtamaDepan getInstance() {
+    public static HalamanUtama getInstance() {
         if (myInstance == null) {
-            myInstance = new HalamanUtamaDepan();
+            myInstance = new HalamanUtama();
         }
 
         return myInstance;

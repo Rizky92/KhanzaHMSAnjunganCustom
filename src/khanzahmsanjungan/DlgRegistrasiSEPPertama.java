@@ -546,7 +546,7 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
         });
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-03-2024" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-04-2024" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         Tanggal.setOpaque(false);
@@ -670,7 +670,7 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
 
         TanggalSEP.setEditable(false);
         TanggalSEP.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-03-2024" }));
+        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-04-2024" }));
         TanggalSEP.setDisplayFormat("dd-MM-yyyy");
         TanggalSEP.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         TanggalSEP.setOpaque(false);
@@ -692,7 +692,7 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
 
         TanggalRujuk.setEditable(false);
         TanggalRujuk.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-03-2024" }));
+        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-04-2024" }));
         TanggalRujuk.setDisplayFormat("dd-MM-yyyy");
         TanggalRujuk.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         TanggalRujuk.setOpaque(false);
@@ -978,7 +978,7 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
         jLabel38.setBounds(650, 280, 80, 30);
 
         TanggalKKL.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalKKL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-03-2024" }));
+        TanggalKKL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-04-2024" }));
         TanggalKKL.setDisplayFormat("dd-MM-yyyy");
         TanggalKKL.setEnabled(false);
         TanggalKKL.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N

@@ -207,7 +207,7 @@
             <Component class="widget.Button" name="btnAksiKonfirmasi">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="D:\Projects\java\khanza-apm-custom\src\picture\Save.png"/>
+                  <Image iconType="2" name="C:\Users\Rizky Rizaldi\Projects\java\khanza-apm-custom\src\picture\Save.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Konfirmasi"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -226,7 +226,7 @@
             <Component class="widget.Button" name="btnAksiBatal">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="D:\Projects\java\khanza-apm-custom\src\picture\Delete.png"/>
+                  <Image iconType="2" name="C:\Users\Rizky Rizaldi\Projects\java\khanza-apm-custom\src\picture\Delete.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Batal"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">

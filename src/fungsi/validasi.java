@@ -94,6 +94,24 @@ public final class validasi {
         return new SimpleDateFormat("yyyy-MM-dd").format(tgl.getDate());
     }
     
+    public boolean isiKosongSmc(String namaKolom, JTextField component) {
+        if (component.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, namaKolom + " masih kosong...!!!");
+            component.requestFocus();
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean isiKosongSmc(String namaKolom, JComboBox component) {
+        if (component.getSelectedItem().toString().isBlank()) {
+            JOptionPane.showMessageDialog(null, namaKolom + " masih kosong...!!!");
+            component.requestFocus();
+            return false;
+        }
+        return true;
+    }
+    
     public void printReport(String namaReport, String namaPrinter, String judul, int jumlah, Map params) {
         String currentDir = System.getProperties().getProperty("user.dir");
 

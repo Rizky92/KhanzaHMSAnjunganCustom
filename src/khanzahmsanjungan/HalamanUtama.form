@@ -164,7 +164,7 @@
         <Property name="rows" type="int" value="0"/>
       </Layout>
       <SubComponents>
-        <Component class="widget.ButtonBig" name="btnAdmin10">
+        <Component class="widget.ButtonBig" name="ambilAntrian">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/48x48/antrianpasien.png"/>
@@ -179,10 +179,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin10ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ambilAntrianActionPerformed"/>
           </Events>
         </Component>
-        <Component class="widget.ButtonBig" name="btnAdmin7">
+        <Component class="widget.ButtonBig" name="cekInRegistrasi">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/48x48/checkin.png"/>
@@ -198,10 +198,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin7ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cekInRegistrasiActionPerformed"/>
           </Events>
         </Component>
-        <Component class="widget.ButtonBig" name="btnAdmin2">
+        <Component class="widget.ButtonBig" name="daftarPoliJaminanPribadi">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/48x48/kioskselfservice.png"/>
@@ -216,13 +216,13 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="daftarPoliJaminanPribadiActionPerformed"/>
           </Events>
         </Component>
-        <Component class="widget.ButtonBig" name="btnAdmin5">
+        <Component class="widget.ButtonBig" name="daftarBPJSKunjunganPertama">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/48x48/BPJS_Kesehatan_Logo.png"/>
+              <Image iconType="3" name="/48x48/48x48-bpjs.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="SEP KUNJUNGAN PERTAMA"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -234,13 +234,13 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin5ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="daftarBPJSKunjunganPertamaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="widget.ButtonBig" name="btnAdmin6">
+        <Component class="widget.ButtonBig" name="daftarBPJSKontrol">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/48x48/BPJS_Kesehatan_Logo.png"/>
+              <Image iconType="3" name="/48x48/48x48-bpjs.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="SEP KONTROL"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -252,13 +252,13 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin6ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="daftarBPJSKontrolActionPerformed"/>
           </Events>
         </Component>
-        <Component class="widget.ButtonBig" name="btnAdmin9">
+        <Component class="widget.ButtonBig" name="daftarBPJSKontrolBedaPoli">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/48x48/BPJS_Kesehatan_Logo.png"/>
+              <Image iconType="3" name="/48x48/48x48-bpjs.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="SEP KONTROL BEDA POLI"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -270,13 +270,13 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin9ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="daftarBPJSKontrolBedaPoliActionPerformed"/>
           </Events>
         </Component>
-        <Component class="widget.ButtonBig" name="btnAdmin8">
+        <Component class="widget.ButtonBig" name="cekInMobileJKN">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/48x48/mobilejkn48.png"/>
+              <Image iconType="3" name="/48x48/48x48-mjkn.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="CEK IN MOBILEJKN"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -288,7 +288,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdmin8ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cekInMobileJKNActionPerformed"/>
           </Events>
         </Component>
         <Component class="widget.ButtonBig" name="btnAdmin11">

@@ -4,12 +4,7 @@
  */
 package khanzahmsanjungan;
 
-import fungsi.akses;
-import fungsi.sekuel;
-import fungsi.validasi;
-import java.awt.Cursor;
 import java.awt.Dimension;
-import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -20,25 +15,16 @@ import javax.swing.JOptionPane;
  * @author it-rsib
  */
 public class HalamanUtama extends javax.swing.JFrame {
-
-    private static HalamanUtama myInstance;
-    private sekuel Sequel = new sekuel();
-    private validasi Valid = new validasi();
-
-    /**
-     * Creates new form HalamanUtamaDepan
-     */
     public HalamanUtama() {
         initComponents();
-        setExtendedState(MAXIMIZED_BOTH);
-        setIconImage(new ImageIcon(super.getClass().getResource("/picture/indriati48.png")).getImage());
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setSize(screenSize.width, screenSize.height);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setSize(screenSize.width, screenSize.height);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setIconImage(new ImageIcon(super.getClass().getResource("/picture/icon-48x48.png")).getImage());
         
-        jPanel1.remove(btnAdmin10);
+        jPanel1.remove(ambilAntrian);
         jPanel1.remove(btnAdmin11);
-        jPanel1.remove(btnAdmin7);
+        jPanel1.remove(cekInRegistrasi);
         
         jPanel1.repaint();
     }
@@ -58,13 +44,13 @@ public class HalamanUtama extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         PanelWall = new usu.widget.glass.PanelGlass();
         jPanel1 = new component.Panel();
-        btnAdmin10 = new widget.ButtonBig();
-        btnAdmin7 = new widget.ButtonBig();
-        btnAdmin2 = new widget.ButtonBig();
-        btnAdmin5 = new widget.ButtonBig();
-        btnAdmin6 = new widget.ButtonBig();
-        btnAdmin9 = new widget.ButtonBig();
-        btnAdmin8 = new widget.ButtonBig();
+        ambilAntrian = new widget.ButtonBig();
+        cekInRegistrasi = new widget.ButtonBig();
+        daftarPoliJaminanPribadi = new widget.ButtonBig();
+        daftarBPJSKunjunganPertama = new widget.ButtonBig();
+        daftarBPJSKontrol = new widget.ButtonBig();
+        daftarBPJSKontrolBedaPoli = new widget.ButtonBig();
+        cekInMobileJKN = new widget.ButtonBig();
         btnAdmin11 = new widget.ButtonBig();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -124,90 +110,90 @@ public class HalamanUtama extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(1280, 1024));
         jPanel1.setLayout(new java.awt.GridLayout(0, 2));
 
-        btnAdmin10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/antrianpasien.png"))); // NOI18N
-        btnAdmin10.setText("AMBIL ANTRIAN");
-        btnAdmin10.setFont(new java.awt.Font("Inter Display", 1, 30)); // NOI18N
-        btnAdmin10.setIconTextGap(0);
-        btnAdmin10.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnAdmin10.addActionListener(new java.awt.event.ActionListener() {
+        ambilAntrian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/antrianpasien.png"))); // NOI18N
+        ambilAntrian.setText("AMBIL ANTRIAN");
+        ambilAntrian.setFont(new java.awt.Font("Inter Display", 1, 30)); // NOI18N
+        ambilAntrian.setIconTextGap(0);
+        ambilAntrian.setPreferredSize(new java.awt.Dimension(200, 90));
+        ambilAntrian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdmin10ActionPerformed(evt);
+                ambilAntrianActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAdmin10);
+        jPanel1.add(ambilAntrian);
 
-        btnAdmin7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/checkin.png"))); // NOI18N
-        btnAdmin7.setText("CEK IN REGISTRASI");
-        btnAdmin7.setEnabled(false);
-        btnAdmin7.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
-        btnAdmin7.setIconTextGap(0);
-        btnAdmin7.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnAdmin7.addActionListener(new java.awt.event.ActionListener() {
+        cekInRegistrasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/checkin.png"))); // NOI18N
+        cekInRegistrasi.setText("CEK IN REGISTRASI");
+        cekInRegistrasi.setEnabled(false);
+        cekInRegistrasi.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+        cekInRegistrasi.setIconTextGap(0);
+        cekInRegistrasi.setPreferredSize(new java.awt.Dimension(200, 90));
+        cekInRegistrasi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdmin7ActionPerformed(evt);
+                cekInRegistrasiActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAdmin7);
+        jPanel1.add(cekInRegistrasi);
 
-        btnAdmin2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/kioskselfservice.png"))); // NOI18N
-        btnAdmin2.setText("DAFTAR POLIKLINIK");
-        btnAdmin2.setFont(new java.awt.Font("Inter Display", 1, 30)); // NOI18N
-        btnAdmin2.setIconTextGap(0);
-        btnAdmin2.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnAdmin2.addActionListener(new java.awt.event.ActionListener() {
+        daftarPoliJaminanPribadi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/kioskselfservice.png"))); // NOI18N
+        daftarPoliJaminanPribadi.setText("DAFTAR POLIKLINIK");
+        daftarPoliJaminanPribadi.setFont(new java.awt.Font("Inter Display", 1, 30)); // NOI18N
+        daftarPoliJaminanPribadi.setIconTextGap(0);
+        daftarPoliJaminanPribadi.setPreferredSize(new java.awt.Dimension(200, 90));
+        daftarPoliJaminanPribadi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdmin2ActionPerformed(evt);
+                daftarPoliJaminanPribadiActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAdmin2);
+        jPanel1.add(daftarPoliJaminanPribadi);
 
-        btnAdmin5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/BPJS_Kesehatan_Logo.png"))); // NOI18N
-        btnAdmin5.setText("SEP KUNJUNGAN PERTAMA");
-        btnAdmin5.setFont(new java.awt.Font("Inter Display", 1, 30)); // NOI18N
-        btnAdmin5.setIconTextGap(0);
-        btnAdmin5.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnAdmin5.addActionListener(new java.awt.event.ActionListener() {
+        daftarBPJSKunjunganPertama.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/48x48-bpjs.png"))); // NOI18N
+        daftarBPJSKunjunganPertama.setText("SEP KUNJUNGAN PERTAMA");
+        daftarBPJSKunjunganPertama.setFont(new java.awt.Font("Inter Display", 1, 30)); // NOI18N
+        daftarBPJSKunjunganPertama.setIconTextGap(0);
+        daftarBPJSKunjunganPertama.setPreferredSize(new java.awt.Dimension(200, 90));
+        daftarBPJSKunjunganPertama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdmin5ActionPerformed(evt);
+                daftarBPJSKunjunganPertamaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAdmin5);
+        jPanel1.add(daftarBPJSKunjunganPertama);
 
-        btnAdmin6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/BPJS_Kesehatan_Logo.png"))); // NOI18N
-        btnAdmin6.setText("SEP KONTROL");
-        btnAdmin6.setFont(new java.awt.Font("Inter Display", 1, 30)); // NOI18N
-        btnAdmin6.setIconTextGap(0);
-        btnAdmin6.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnAdmin6.addActionListener(new java.awt.event.ActionListener() {
+        daftarBPJSKontrol.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/48x48-bpjs.png"))); // NOI18N
+        daftarBPJSKontrol.setText("SEP KONTROL");
+        daftarBPJSKontrol.setFont(new java.awt.Font("Inter Display", 1, 30)); // NOI18N
+        daftarBPJSKontrol.setIconTextGap(0);
+        daftarBPJSKontrol.setPreferredSize(new java.awt.Dimension(200, 90));
+        daftarBPJSKontrol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdmin6ActionPerformed(evt);
+                daftarBPJSKontrolActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAdmin6);
+        jPanel1.add(daftarBPJSKontrol);
 
-        btnAdmin9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/BPJS_Kesehatan_Logo.png"))); // NOI18N
-        btnAdmin9.setText("SEP KONTROL BEDA POLI");
-        btnAdmin9.setFont(new java.awt.Font("Inter Display", 1, 30)); // NOI18N
-        btnAdmin9.setIconTextGap(0);
-        btnAdmin9.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnAdmin9.addActionListener(new java.awt.event.ActionListener() {
+        daftarBPJSKontrolBedaPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/48x48-bpjs.png"))); // NOI18N
+        daftarBPJSKontrolBedaPoli.setText("SEP KONTROL BEDA POLI");
+        daftarBPJSKontrolBedaPoli.setFont(new java.awt.Font("Inter Display", 1, 30)); // NOI18N
+        daftarBPJSKontrolBedaPoli.setIconTextGap(0);
+        daftarBPJSKontrolBedaPoli.setPreferredSize(new java.awt.Dimension(200, 90));
+        daftarBPJSKontrolBedaPoli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdmin9ActionPerformed(evt);
+                daftarBPJSKontrolBedaPoliActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAdmin9);
+        jPanel1.add(daftarBPJSKontrolBedaPoli);
 
-        btnAdmin8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/mobilejkn48.png"))); // NOI18N
-        btnAdmin8.setText("CEK IN MOBILEJKN");
-        btnAdmin8.setFont(new java.awt.Font("Inter Display", 1, 30)); // NOI18N
-        btnAdmin8.setIconTextGap(0);
-        btnAdmin8.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnAdmin8.addActionListener(new java.awt.event.ActionListener() {
+        cekInMobileJKN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/48x48-mjkn.png"))); // NOI18N
+        cekInMobileJKN.setText("CEK IN MOBILEJKN");
+        cekInMobileJKN.setFont(new java.awt.Font("Inter Display", 1, 30)); // NOI18N
+        cekInMobileJKN.setIconTextGap(0);
+        cekInMobileJKN.setPreferredSize(new java.awt.Dimension(200, 90));
+        cekInMobileJKN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdmin8ActionPerformed(evt);
+                cekInMobileJKNActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAdmin8);
+        jPanel1.add(cekInMobileJKN);
 
         btnAdmin11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/logo-satset.png"))); // NOI18N
         btnAdmin11.setText("AKTIVASI SATUSEHAT");
@@ -227,58 +213,58 @@ public class HalamanUtama extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAdmin6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin6ActionPerformed
+    private void daftarBPJSKontrolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daftarBPJSKontrolActionPerformed
         DlgCekSKDPKontrol pilih = new DlgCekSKDPKontrol(null, true);
         pilih.setSize(this.getWidth(), this.getHeight());
         pilih.setLocationRelativeTo(this);
         pilih.setVisible(true);
-    }//GEN-LAST:event_btnAdmin6ActionPerformed
+    }//GEN-LAST:event_daftarBPJSKontrolActionPerformed
 
-    private void btnAdmin2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin2ActionPerformed
+    private void daftarPoliJaminanPribadiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daftarPoliJaminanPribadiActionPerformed
         DlgCekNoRM pilih = new DlgCekNoRM(null, true);
         pilih.setSize(this.getWidth(), this.getHeight());
         pilih.setLocationRelativeTo(this);
         pilih.setVisible(true);
-    }//GEN-LAST:event_btnAdmin2ActionPerformed
+    }//GEN-LAST:event_daftarPoliJaminanPribadiActionPerformed
 
-    private void btnAdmin7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin7ActionPerformed
+    private void cekInRegistrasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cekInRegistrasiActionPerformed
         JOptionPane.showMessageDialog(rootPane, "Mohon maaf, fitur masih dalam tahap pengembangan");
 //        DlgCekBooking pilih = new DlgCekBooking(null, true);
 //        pilih.setSize(this.getWidth(), this.getHeight());
 //        pilih.setLocationRelativeTo(this);
 //        pilih.setVisible(true);
-    }//GEN-LAST:event_btnAdmin7ActionPerformed
+    }//GEN-LAST:event_cekInRegistrasiActionPerformed
 
-    private void btnAdmin5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin5ActionPerformed
+    private void daftarBPJSKunjunganPertamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daftarBPJSKunjunganPertamaActionPerformed
         DlgCekKunjunganPertamaSEP pilih = new DlgCekKunjunganPertamaSEP(null, true);
         pilih.setSize(this.getWidth(), this.getHeight());
         pilih.setLocationRelativeTo(this);
         pilih.setVisible(true);
-    }//GEN-LAST:event_btnAdmin5ActionPerformed
+    }//GEN-LAST:event_daftarBPJSKunjunganPertamaActionPerformed
 
-    private void btnAdmin8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin8ActionPerformed
+    private void cekInMobileJKNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cekInMobileJKNActionPerformed
         DlgCekinMobileJKN pilih = new DlgCekinMobileJKN(null, true);
         pilih.setSize(this.getWidth(), this.getHeight());
         pilih.setLocationRelativeTo(this);
         pilih.setVisible(true);
 
 //        JOptionPane.showMessageDialog(rootPane, "Mohon maaf, fitur masih dalam tahap pengembangan");
-    }//GEN-LAST:event_btnAdmin8ActionPerformed
+    }//GEN-LAST:event_cekInMobileJKNActionPerformed
 
-    private void btnAdmin9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin9ActionPerformed
+    private void daftarBPJSKontrolBedaPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daftarBPJSKontrolBedaPoliActionPerformed
         DlgCekKunjunganBedaPoli pilih = new DlgCekKunjunganBedaPoli(null, true);
         pilih.setSize(this.getWidth(), this.getHeight());
         pilih.setLocationRelativeTo(this);
         pilih.setVisible(true);
-    }//GEN-LAST:event_btnAdmin9ActionPerformed
+    }//GEN-LAST:event_daftarBPJSKontrolBedaPoliActionPerformed
 
-    private void btnAdmin10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin10ActionPerformed
+    private void ambilAntrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ambilAntrianActionPerformed
         JOptionPane.showMessageDialog(rootPane, "Mohon maaf, fitur masih dalam tahap pengembangan");
 //        HalamanUtamaAntrian pilih = new HalamanUtamaAntrian();
 //        pilih.setSize(this.getWidth(), this.getHeight());
 //        pilih.setLocationRelativeTo(this);
 //        pilih.setVisible(true);
-    }//GEN-LAST:event_btnAdmin10ActionPerformed
+    }//GEN-LAST:event_ambilAntrianActionPerformed
 
     private void btnAdmin11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin11ActionPerformed
         JOptionPane.showMessageDialog(rootPane, "Mohon maaf, fitur masih dalam tahap pengembangan");
@@ -324,24 +310,16 @@ public class HalamanUtama extends javax.swing.JFrame {
         });
     }
 
-    public static HalamanUtama getInstance() {
-        if (myInstance == null) {
-            myInstance = new HalamanUtama();
-        }
-
-        return myInstance;
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private usu.widget.glass.PanelGlass PanelWall;
-    private widget.ButtonBig btnAdmin10;
+    private widget.ButtonBig ambilAntrian;
     private widget.ButtonBig btnAdmin11;
-    private widget.ButtonBig btnAdmin2;
-    private widget.ButtonBig btnAdmin5;
-    private widget.ButtonBig btnAdmin6;
-    private widget.ButtonBig btnAdmin7;
-    private widget.ButtonBig btnAdmin8;
-    private widget.ButtonBig btnAdmin9;
+    private widget.ButtonBig cekInMobileJKN;
+    private widget.ButtonBig cekInRegistrasi;
+    private widget.ButtonBig daftarBPJSKontrol;
+    private widget.ButtonBig daftarBPJSKontrolBedaPoli;
+    private widget.ButtonBig daftarBPJSKunjunganPertama;
+    private widget.ButtonBig daftarPoliJaminanPribadi;
     private javax.swing.JLabel jLabel1;
     private widget.Label jLabel39;
     private component.Panel jPanel1;

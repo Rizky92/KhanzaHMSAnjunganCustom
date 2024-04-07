@@ -109,6 +109,13 @@ public class DlgCekKunjunganPertamaSEP extends javax.swing.JDialog {
         NoRMPasien.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         NoRMPasien.setFont(new java.awt.Font("Inter", 0, 36)); // NOI18N
         NoRMPasien.setPreferredSize(new java.awt.Dimension(350, 75));
+        NoRMPasien.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                NoRMPasienActionPerformed(evt);
+            }
+        });
         NoRMPasien.addKeyListener(new java.awt.event.KeyAdapter()
         {
             public void keyPressed(java.awt.event.KeyEvent evt)
@@ -524,6 +531,11 @@ public class DlgCekKunjunganPertamaSEP extends javax.swing.JDialog {
             NoRMPasien.setText("");
         }
     }//GEN-LAST:event_btnClearActionPerformed
+
+    private void NoRMPasienActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_NoRMPasienActionPerformed
+    {//GEN-HEADEREND:event_NoRMPasienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NoRMPasienActionPerformed
 
     /**
      * @param args the command line arguments

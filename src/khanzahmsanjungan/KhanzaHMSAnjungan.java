@@ -25,7 +25,7 @@ public class KhanzaHMSAnjungan {
     public static void main(String[] args) {
 
         WidgetUtilities.invokeLater(() -> {
-            HalamanUtama utama = HalamanUtama.getInstance();
+            HalamanUtama utama = new HalamanUtama();
             utama.setVisible(true);
             
             String printerBarcode = null, printerRegistrasi = null;

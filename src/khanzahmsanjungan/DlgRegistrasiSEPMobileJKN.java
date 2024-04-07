@@ -431,7 +431,7 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog
         });
         internalFrame1.add(pwPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 230, 23));
 
-        btnAksiKonfirmasi.setIcon(new javax.swing.ImageIcon("D:\\Projects\\java\\khanza-apm-custom\\src\\picture\\Save.png")); // NOI18N
+        btnAksiKonfirmasi.setIcon(new javax.swing.ImageIcon("C:\\Users\\Rizky Rizaldi\\Projects\\java\\khanza-apm-custom\\src\\picture\\Save.png")); // NOI18N
         btnAksiKonfirmasi.setText("Konfirmasi");
         btnAksiKonfirmasi.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAksiKonfirmasi.addActionListener(new java.awt.event.ActionListener() {
@@ -441,7 +441,7 @@ public class DlgRegistrasiSEPMobileJKN extends javax.swing.JDialog
         });
         internalFrame1.add(btnAksiKonfirmasi, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, -1, -1));
 
-        btnAksiBatal.setIcon(new javax.swing.ImageIcon("D:\\Projects\\java\\khanza-apm-custom\\src\\picture\\Delete.png")); // NOI18N
+        btnAksiBatal.setIcon(new javax.swing.ImageIcon("C:\\Users\\Rizky Rizaldi\\Projects\\java\\khanza-apm-custom\\src\\picture\\Delete.png")); // NOI18N
         btnAksiBatal.setText("Batal");
         btnAksiBatal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAksiBatal.addActionListener(new java.awt.event.ActionListener() {

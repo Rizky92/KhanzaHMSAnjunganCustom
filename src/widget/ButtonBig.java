@@ -20,6 +20,5 @@ public class ButtonBig extends ButtonImageReflection {
 //        setForeground(new Color(50, 50, 50));
         setFont(new java.awt.Font("Inter", 0, 14));
         setBackground(Color.red);
-
     }
 }

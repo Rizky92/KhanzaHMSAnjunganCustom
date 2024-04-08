@@ -21,12 +21,7 @@ import javax.swing.JOptionPane;
 public class DlgCekSKDPKontrol extends javax.swing.JDialog
 {
     private final sekuel Sequel = new sekuel();
-    /**
-     * Creates new form DlgAdmin
-     *
-     * @param parent
-     * @param id
-     */
+    
     public DlgCekSKDPKontrol(java.awt.Frame parent, boolean id) {
         super(parent, id);
         initComponents();
@@ -521,4 +516,8 @@ public class DlgCekSKDPKontrol extends javax.swing.JDialog
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
+    
+    public void clearText() {
+        NoRMPasien.setText("");
+    }
 }

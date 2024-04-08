@@ -115,7 +115,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
       <SubComponents>
-        <Component class="component.TextBox" name="NoRMPasien">
+        <Component class="component.TextBox" name="input">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -133,8 +133,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NoRMPasienActionPerformed"/>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="NoRMPasienKeyPressed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="inputKeyPressed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -161,7 +160,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="widget.ButtonBig" name="BtnClose">
+        <Component class="widget.ButtonBig" name="batal">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -188,7 +187,7 @@
             <Property name="verticalAlignment" type="int" value="1"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCloseActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="batalActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -196,7 +195,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="widget.ButtonBig" name="BtnClose2">
+        <Component class="widget.ButtonBig" name="konfirm">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -222,7 +221,7 @@
             <Property name="verticalAlignment" type="int" value="1"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnClose2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="konfirmActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -252,32 +251,32 @@
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnAngka4" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="keypad4" min="-2" pref="90" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnAngka5" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="keypad5" min="-2" pref="90" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnAngka6" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="keypad6" min="-2" pref="90" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnAngka1" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="keypad1" min="-2" pref="90" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnAngka2" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="keypad2" min="-2" pref="90" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnAngka3" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="keypad3" min="-2" pref="90" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnClear" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="keypadClear" min="-2" pref="90" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnAngka0" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="keypad0" min="-2" pref="90" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnAngkaHps" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="keypadBackspace" min="-2" pref="90" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnAngka7" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="keypad7" min="-2" pref="90" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnAngka8" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="keypad8" min="-2" pref="90" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnAngka9" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="keypad9" min="-2" pref="90" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
@@ -289,27 +288,27 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnAngka7" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
-                          <Component id="btnAngka8" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
-                          <Component id="btnAngka9" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="keypad7" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="keypad8" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="keypad9" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnAngka4" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                          <Component id="btnAngka5" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
-                          <Component id="btnAngka6" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="keypad4" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="keypad5" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="keypad6" alignment="3" min="-2" pref="90" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnAngka3" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
-                          <Component id="btnAngka2" alignment="1" min="-2" pref="90" max="-2" attributes="0"/>
-                          <Component id="btnAngka1" alignment="1" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="keypad3" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="keypad2" alignment="1" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="keypad1" alignment="1" min="-2" pref="90" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnAngka0" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
-                          <Component id="btnAngkaHps" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
-                          <Component id="btnClear" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="keypad0" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="keypadBackspace" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="keypadClear" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   </Group>
@@ -317,7 +316,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="btnAngka8">
+            <Component class="javax.swing.JButton" name="keypad8">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI SemiBold" size="48" style="0"/>
@@ -325,10 +324,10 @@
                 <Property name="text" type="java.lang.String" value="8"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAngka8ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="keypad8ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnAngka7">
+            <Component class="javax.swing.JButton" name="keypad7">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI SemiBold" size="48" style="0"/>
@@ -336,10 +335,10 @@
                 <Property name="text" type="java.lang.String" value="7"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAngka7ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="keypad7ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnAngka9">
+            <Component class="javax.swing.JButton" name="keypad9">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI SemiBold" size="48" style="0"/>
@@ -347,10 +346,10 @@
                 <Property name="text" type="java.lang.String" value="9"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAngka9ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="keypad9ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnAngka4">
+            <Component class="javax.swing.JButton" name="keypad4">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI SemiBold" size="48" style="0"/>
@@ -358,10 +357,10 @@
                 <Property name="text" type="java.lang.String" value="4"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAngka4ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="keypad4ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnAngka5">
+            <Component class="javax.swing.JButton" name="keypad5">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI SemiBold" size="48" style="0"/>
@@ -369,10 +368,10 @@
                 <Property name="text" type="java.lang.String" value="5"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAngka5ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="keypad5ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnAngka6">
+            <Component class="javax.swing.JButton" name="keypad6">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI SemiBold" size="48" style="0"/>
@@ -380,10 +379,10 @@
                 <Property name="text" type="java.lang.String" value="6"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAngka6ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="keypad6ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnAngka2">
+            <Component class="javax.swing.JButton" name="keypad2">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI SemiBold" size="48" style="0"/>
@@ -391,10 +390,10 @@
                 <Property name="text" type="java.lang.String" value="2"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAngka2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="keypad2ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnAngka1">
+            <Component class="javax.swing.JButton" name="keypad1">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI SemiBold" size="48" style="0"/>
@@ -402,10 +401,10 @@
                 <Property name="text" type="java.lang.String" value="1"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAngka1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="keypad1ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnAngka3">
+            <Component class="javax.swing.JButton" name="keypad3">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI SemiBold" size="48" style="0"/>
@@ -413,10 +412,10 @@
                 <Property name="text" type="java.lang.String" value="3"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAngka3ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="keypad3ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnAngka0">
+            <Component class="javax.swing.JButton" name="keypad0">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI SemiBold" size="48" style="0"/>
@@ -424,10 +423,10 @@
                 <Property name="text" type="java.lang.String" value="0"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAngka0ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="keypad0ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnAngkaHps">
+            <Component class="javax.swing.JButton" name="keypadBackspace">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI SemiBold" size="36" style="0"/>
@@ -445,10 +444,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAngkaHpsActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="keypadBackspaceActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnClear">
+            <Component class="javax.swing.JButton" name="keypadClear">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI SemiBold" size="48" style="0"/>
@@ -456,7 +455,7 @@
                 <Property name="text" type="java.lang.String" value="C"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClearActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="keypadClearActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

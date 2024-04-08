@@ -94,6 +94,10 @@ public final class validasi {
         return new SimpleDateFormat("yyyy-MM-dd").format(tgl.getDate());
     }
     
+    public String setTglJamSmc(Tanggal tgl) {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(tgl.getDate());
+    }
+    
     public boolean isiKosongSmc(String namaKolom, JTextField component) {
         if (component.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, namaKolom + " masih kosong...!!!");

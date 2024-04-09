@@ -71,6 +71,8 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
                    _noTelp = "",
                    aksiFP = "",
                    noRawat = "",
+                   noSEP = "",
+                   noRujukRS = "",
                    noReg = "",
                    kodePoliRS = "",
                    kodeDokterRS = "",
@@ -2120,22 +2122,7 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
     }
 
     private void cetakRegistrasi(String noSEP) {
-        Map<String, Object> param = new HashMap<>();
-        param.put("norawat", TNoRw.getText());
-        param.put("parameter", noSEP);
-        param.put("namars", query.cariIsi("select setting.nama_instansi from setting limit 1"));
-        param.put("kotars", query.cariIsi("select setting.kabupaten from setting limit 1"));
         
-        if (jenisPelayanan.getSelectedIndex() == 0) {
-            valid.printReport("rptBridgingSEPAPM1.jasper", koneksiDB.PRINTER_REGISTRASI(), "::[ Cetak SEP Model 4 ]::", 1, param);
-            valid.MyReport("rptBridgingSEPAPM1.jasper", "report", "::[ Cetak SEP Model 4 ]::", param);
-        } else {
-            valid.printReport("rptBridgingSEPAPM2.jasper", koneksiDB.PRINTER_REGISTRASI(), "::[ Cetak SEP Model 4 ]::", 1, param);
-            valid.MyReport("rptBridgingSEPAPM2.jasper", "report", "::[ Cetak SEP Model 4 ]::", param);
-        }
-        
-        valid.printReport("rptBarcodeRawatAPM.jasper", koneksiDB.PRINTER_BARCODE(), "::[ Barcode Perawatan ]::", 3, param);
-        valid.MyReport("rptBarcodeRawatAPM.jasper", "report", "::[ Barcode Perawatan ]::", param);
     }
 
     private void insertSEP() {
@@ -3136,47 +3123,6 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
         return true;
     }
     
-    private boolean simpanRujukan() {
-        int coba = 0, maxCoba = 5;
-        
-        NoRujukMasuk.setText(query.cariIsiSmc("select concat('BR/', date_format(?, '%Y/%m/%d'), '/', lpad(ifnull(max(convert(right(rujuk_masuk.no_balasan, 4), signed)), 0) + 1, 4, '0')) from rujuk_masuk where rujuk_masuk.no_balasan like concat('BR/', date_format(?, '%Y/%m/%d/'), '%')",
-                valid.SetTgl(tglSEP.getSelectedItem().toString()), valid.SetTgl(tglSEP.getSelectedItem().toString())
-            )
-        );
-        
-        System.out.println("Mencoba memproses rujukan masuk pasien dengan no. surat: " + NoRujukMasuk.getText());
-        
-        while (coba < maxCoba && (
-            !query.menyimpantfSmc("rujuk_masuk", null,
-                TNoRw.getText(), namaPPK.getText(), "-", noRujukan.getText(),
-                "0", namaPPK.getText(), kodeDiagnosa.getText(), "-", "-", NoRujukMasuk.getText()
-            )
-        )) {
-            NoRujukMasuk.setText(query.cariIsiSmc("select concat('BR/', date_format(?, '%Y/%m/%d/'), lpad(ifnull(max(convert(right(rujuk_masuk.no_balasan, 4), signed)), 0) + 1, 4, '0')) from rujuk_masuk where rujuk_masuk.no_balasan like concat('BR/', date_format(?, '%Y/%m/%d/'), '%')",
-                    valid.SetTgl(tglSEP.getSelectedItem().toString()), valid.SetTgl(tglSEP.getSelectedItem().toString())
-                )
-            );
-            
-            System.out.println("Mencoba memproses rujukan masuk pasien dengan no. surat balasan: " + NoRujukMasuk.getText());
-            
-            coba++;
-        }
-        
-        String isNoRujukMasuk = query.cariIsiSmc("select rujuk_masuk.no_balasan from rujuk_masuk where rujuk_masuk.no_rawat = ?", TNoRw.getText());
-        
-        if (coba == maxCoba && (isNoRujukMasuk == null || (! isNoRujukMasuk.equals(NoRujukMasuk.getText())))) {
-            System.out.println("======================================================");
-            System.out.println("Tidak dapat memproses rujukan masuk dengan detail berikut:");
-            System.out.println("No. Surat: " + NoRujukMasuk.getText());
-            System.out.println("No. Rawat: " + TNoRw.getText());
-            System.out.println("======================================================");
-            
-            return false;
-        }
-        
-        return true;
-    }
-    
     private void updateUmurPasien() {
         query.mengupdateSmc("pasien",
             "no_tlp = ?, umur = concat(concat(concat(timestampdiff(year, tgl_lahir, curdate()), ' Th '), concat(timestampdiff(month, tgl_lahir, curdate()) - ((timestampdiff(month, tgl_lahir, curdate()) div 12) * 12), ' Bl ')), concat(timestampdiff(day, date_add(date_add(tgl_lahir, interval timestampdiff(year, tgl_lahir, curdate()) year), interval timestampdiff(month, tgl_lahir, curdate()) - ((timestampdiff(month, tgl_lahir, curdate()) div 12) * 12) month), curdate()), ' Hr'))",
@@ -3494,6 +3440,79 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
 
     public void tampilRujukanKontrol(String input) {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        
+        utc = api.getUTCDateTime();
+        url = koneksiDB.URLAPIBPJS() + "/RencanaKontrol/noSuratKontrol/" + input;
+        
+        try {
+            headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
+            headers.add("X-Timestamp", utc);
+            headers.add("X-Signature", api.getHmac(utc));
+            headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
+            entity = new HttpEntity(headers);
+            root = mapper.readTree(api.getRest().exchange(url, HttpMethod.GET, entity, String.class).getBody());
+            metaData = root.path("metaData");
+            if (metaData.path("code").asText().equals("200")) {
+                response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
+                
+                
+                // TODO: gunakan endpoint ini
+                // koneksiDB.URLAPIBPJS() + "/RencanaKontrol/noSuratKontrol/" + input
+                // Method GET
+                /* {
+                    "metaData": {
+                        "code": "200",
+                        "message": "Sukses"
+                    },
+                    "response": {
+                        "noSuratKontrol": "0301R0010120K000003",
+                        "tglRencanaKontrol": "2020-01-21",
+                        "tglTerbit": "2020-01-21",
+                        "jnsKontrol": "2",
+                        "poliTujuan": "010",
+                        "namaPoliTujuan": "ENDOKRIN-METABOLIK-DIABETES",
+                        "kodeDokter": "266822",
+                        "namaDokter": "DR.dr.H Eva Decroli, SpPD K-EMD Finasim",
+                        "flagKontrol": "False",
+                        "kodeDokterPembuat": null,
+                        "namaDokterPembuat": null,
+                        "namaJnsKontrol": "Kontrol",
+                        "sep": {
+                            "noSep": "0301R0010819V005647",
+                            "tglSep": "2020-01-18",
+                            "jnsPelayanan": "Rawat Jalan",
+                            "poli": "010 - ENDOKRIN-METABOLIK-DIABETES",
+                            "diagnosa": "E11 - Non-insulin-dependent diabetes mellitus",
+                            "peserta": {
+                                "noKartu": "0000015450401",
+                                "nama": "PIASDIL",
+                                "tglLahir": "1954-04-12",
+                                "kelamin": "L",
+                                "hakKelas": "-"
+                            },
+                            "provUmum": {
+                                "kdProvider": "03030101",
+                                "nmProvider": "TARUSAN"
+                            },
+                            "provPerujuk": {
+                                "kdProviderPerujuk": "0042R007",
+                                "nmProviderPerujuk": "Rumah Sakit BKM Painan",
+                                "asalRujukan": "2",
+                                "noRujukan": "0042R0070819B000072",
+                                "tglRujukan": "2020-01-18"
+                            }
+                        }
+                    }
+                } */
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            if (e.toString().contains("UnknownHostException")) {
+                JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus!");
+            }
+        }
         
         // TODO: gunakan endpoint ini
         // koneksiDB.URLAPIBPJS() + "/RencanaKontrol/noSuratKontrol/" + input
@@ -4098,12 +4117,42 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
         }
     }
     
-    private void simpanRujukan() {
-        //
+    private boolean simpanRujukan() {
+        int coba = 0, maxCoba = 5;
+        noRujukRS = query.cariIsiSmc(
+            "select concat('BR/', date_format(?, '%Y/%m/%d'), '/', lpad(ifnull(max(convert(right(rujuk_masuk.no_balasan, 4), signed)), 0) + 1, 4, '0')) from rujuk_masuk where rujuk_masuk.no_balasan like concat('BR/', date_format(?, '%Y/%m/%d/'), '%')",
+            valid.setTglSmc(tglSEP), valid.setTglSmc(tglSEP)
+        );
+        boolean sukses = query.menyimpantfSmc("rujuk_masuk", null, noRawat, namaPPK.getText(), "-", noRujukan.getText(), "0", namaPPK.getText(), kodeDiagnosa.getText(), "-", "-", noRujukRS);
+        
+        while (coba < maxCoba && ! sukses) {
+            noRujukRS = query.cariIsiSmc(
+                "select concat('BR/', date_format(?, '%Y/%m/%d'), '/', lpad(ifnull(max(convert(right(rujuk_masuk.no_balasan, 4), signed)), 0) + 1, 4, '0')) from rujuk_masuk where rujuk_masuk.no_balasan like concat('BR/', date_format(?, '%Y/%m/%d/'), '%')",
+                valid.setTglSmc(tglSEP), valid.setTglSmc(tglSEP)
+            );
+            sukses = query.menyimpantfSmc("rujuk_masuk", null, noRawat, namaPPK.getText(), "-", noRujukan.getText(), "0", namaPPK.getText(), kodeDiagnosa.getText(), "-", "-", noRujukRS);
+        }
+        
+        return sukses;
     }
     
     private void printRegistrasi() {
-        // 
+        Map<String, Object> param = new HashMap<>();
+        param.put("norawat", noRawat);
+        param.put("parameter", noSEP);
+        param.put("namars", namaPPKPelayanan.getText());
+        param.put("kotars", query.cariIsi("select setting.kabupaten from setting limit 1"));
+        
+        if (jenisPelayanan.getSelectedIndex() == 0) {
+            valid.printReport("rptBridgingSEPAPM1.jasper", koneksiDB.PRINTER_REGISTRASI(), "::[ Cetak SEP Model 4 ]::", 1, param);
+            valid.MyReport("rptBridgingSEPAPM1.jasper", "report", "::[ Cetak SEP Model 4 ]::", param);
+        } else {
+            valid.printReport("rptBridgingSEPAPM2.jasper", koneksiDB.PRINTER_REGISTRASI(), "::[ Cetak SEP Model 4 ]::", 1, param);
+            valid.MyReport("rptBridgingSEPAPM2.jasper", "report", "::[ Cetak SEP Model 4 ]::", param);
+        }
+        
+        valid.printReport("rptBarcodeRawatAPM.jasper", koneksiDB.PRINTER_BARCODE(), "::[ Barcode Perawatan ]::", Integer.parseInt(jumlahCetakBarcode.getText()), param);
+        valid.MyReport("rptBarcodeRawatAPM.jasper", "report", "::[ Barcode Perawatan ]::", param);
     }
 
     private void updateSKDP() {

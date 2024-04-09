@@ -393,7 +393,7 @@ public class DlgCekSKDPKontrol extends javax.swing.JDialog
                 NoRMPasien.setText("");
             } else {
                 DlgRegistrasiSEPPertama form = new DlgRegistrasiSEPPertama(null, true);
-                form.tampilKontrol(NoRMPasien.getText());
+                form.tampilKontrolLama(NoRMPasien.getText());
                 form.setSize(this.getWidth(), this.getHeight());
                 form.setLocationRelativeTo(jPanel1);
                 this.dispose();

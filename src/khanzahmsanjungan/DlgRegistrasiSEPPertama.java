@@ -2545,7 +2545,7 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
 //        btnFingerPrintActionPerformed(null);
     }
 
-    public void tampilKontrol(String noSKDP) {
+    public void tampilKontrolLama(String noSKDP) {
         String noSEP = query.cariIsiSmc("select no_sep from bridging_surat_kontrol_bpjs where no_surat = ?", noSKDP);
         String noKartuPeserta = query.cariIsiSmc("select no_kartu from bridging_sep where no_sep = ?", noSEP);
         String tglRencanaKontrol = query.cariIsiSmc("select tgl_rencana from bridging_surat_kontrol_bpjs where no_surat = ?", noSKDP);
@@ -3123,14 +3123,6 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
         return true;
     }
     
-    private void updateUmurPasien() {
-        query.mengupdateSmc("pasien",
-            "no_tlp = ?, umur = concat(concat(concat(timestampdiff(year, tgl_lahir, curdate()), ' Th '), concat(timestampdiff(month, tgl_lahir, curdate()) - ((timestampdiff(month, tgl_lahir, curdate()) div 12) * 12), ' Bl ')), concat(timestampdiff(day, date_add(date_add(tgl_lahir, interval timestampdiff(year, tgl_lahir, curdate()) year), interval timestampdiff(month, tgl_lahir, curdate()) - ((timestampdiff(month, tgl_lahir, curdate()) div 12) * 12) month), curdate()), ' Hr'))",
-            "no_rkm_medis = ?",
-            noTelp.getText(), noRM.getText()
-        );
-    }
-    
     public void tampilRujukanPertama(String input) {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         
@@ -3303,7 +3295,7 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
             metaData = root.path("metaData");
             if (metaData.path("code").asText().equals("200")) {
                 response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
-                asalRujukan.setSelectedIndex(0);
+                asalRujukan.setSelectedIndex(1);
                 jenisPelayanan.setSelectedIndex(1);
                 noRM.setText(query.cariIsiSmc("select no_rkm_medis from pasien where no_peserta = ?", input));
                 namaPasien.setText(response.path("rujukan").path("pasien").path("nama").asText());
@@ -3438,8 +3430,233 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-    public void tampilRujukanKontrol(String input) {
+    // Untuk membantu pencarian menggunakan no. rujukan FKTP dari SKDP
+    private String tampilNoRujukanFKTP(String input) {
+        String responseCode = "";
+        try {
+            utc = api.getUTCDateTime();
+            url = koneksiDB.URLAPIBPJS() + "/Rujukan/" + input;
+            headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
+            headers.add("X-Timestamp", utc);
+            headers.add("X-Signature", api.getHmac(utc));
+            headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
+            entity = new HttpEntity(headers);
+            root = mapper.readTree(api.getRest().exchange(url, HttpMethod.GET, entity, String.class).getBody());
+            metaData = root.path("metaData");
+            responseCode = metaData.path("code").asText();
+            if (responseCode.equals("200")) {
+                response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
+                asalRujukan.setSelectedIndex(0);
+                jenisPelayanan.setSelectedIndex(1);
+                noRM.setText(query.cariIsiSmc("select no_rkm_medis from pasien where no_peserta = ?", response.path("rujukan").path("pasien").path("noKartu").asText()));
+                namaPasien.setText(response.path("rujukan").path("pasien").path("nama").asText());
+                tglLahir.setText(valid.SetTgl(response.path("rujukan").path("pasien").path("tglLahir").asText()));
+                statusPeserta.setText(response.path("rujukan").path("pasien").path("statusPeserta").path("kode").asText() + " " + response.path("rujukan").path("pasien").path("statusPeserta").path("keterangan").asText());
+                noRujukan.setText(response.path("rujukan").path("noKunjungan").asText());
+                kodePPK.setText(response.path("rujukan").path("provPerujuk").path("kode").asText());
+                namaPPK.setText(response.path("rujukan").path("provPerujuk").path("nama").asText());
+                // kodeDiagnosa.setText(response.path("rujukan").path("diagnosa").path("kode").asText());
+                // namaDiagnosa.setText(response.path("rujukan").path("diagnosa").path("nama").asText());
+                kodePoli.setText(response.path("rujukan").path("poliRujukan").path("kode").asText());
+                namaPoli.setText(response.path("rujukan").path("poliRujukan").path("nama").asText());
+                kodePoliRS = query.cariIsiSmc("select kd_poli_rs from maping_poli_bpjs where kd_poli_rs = ?", kodePoli.getText());
+                switch (response.path("rujukan").path("hakKelas").path("kode").asText()) {
+                    case "1": kelas.setSelectedIndex(0); break;
+                    case "2": kelas.setSelectedIndex(1); break;
+                    case "3": kelas.setSelectedIndex(2); break;
+                }
+                jenisPeserta.setText(response.path("rujukan").path("pasien").path("jenisPeserta").path("keterangan").asText());
+                jk.setText(response.path("rujukan").path("pasien").path("sex").asText());
+                _nik = response.path("rujukan").path("pasien").path("nik").asText().replace("null,", "");
+                if (_nik.isBlank()) _nik = query.cariIsiSmc("select no_ktp from pasien where no_rkm_medis = ?", noRM.getText());
+                nik.setText(_nik);
+                noKartu.setText(response.path("rujukan").path("pasien").path("noKartu").asText());
+                tglSEP.setDate(new Date());
+                tglRujuk.setSelectedItem(valid.SetTgl(response.path("rujukan").path("tglKunjungan").asText()));
+                _noTelp = response.path("rujukan").path("pasien").path("mr").path("noTelepon").asText().replace("null", "");
+                if (_noTelp.isBlank()) _noTelp = query.cariIsiSmc("select no_tlp from pasien where no_rkm_medis = ?", noRM.getText());
+                noTelp.setText(_noTelp);
+                prb = response.path("peserta").path("informasi").path("prolanisPRB").asText().replaceAll("null", "");
+            } else {
+                System.out.println("Notif : Tidak dapat menemukan rujukan dari FKTP!");
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            if (e.toString().contains("UnknownHostException")) {
+                JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!!!");
+            }
+        }
+        return responseCode;
+    }
+    
+    // Untuk membantu pencarian menggunakan no. rujukan FKTRL dari SKDP
+    private String tampilNoRujukanFKTRL(String input) {
+        String responseCode = "";
+        try {
+            utc = api.getUTCDateTime();
+            url = koneksiDB.URLAPIBPJS() + "/Rujukan/RS/" + input;
+            headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
+            headers.add("X-Timestamp", utc);
+            headers.add("X-Signature", api.getHmac(utc));
+            headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
+            entity = new HttpEntity(headers);
+            root = mapper.readTree(api.getRest().exchange(url, HttpMethod.GET, entity, String.class).getBody());
+            metaData = root.path("metaData");
+            responseCode = metaData.path("code").asText();
+            if (responseCode.equals("200")) {
+                response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
+                asalRujukan.setSelectedIndex(0);
+                jenisPelayanan.setSelectedIndex(1);
+                noRM.setText(query.cariIsiSmc("select no_rkm_medis from pasien where no_peserta = ?", response.path("rujukan").path("pasien").path("noKartu").asText()));
+                namaPasien.setText(response.path("rujukan").path("pasien").path("nama").asText());
+                tglLahir.setText(valid.SetTgl(response.path("rujukan").path("pasien").path("tglLahir").asText()));
+                statusPeserta.setText(response.path("rujukan").path("pasien").path("statusPeserta").path("kode").asText() + " " + response.path("rujukan").path("pasien").path("statusPeserta").path("keterangan").asText());
+                noRujukan.setText(response.path("rujukan").path("noKunjungan").asText());
+                kodePPK.setText(response.path("rujukan").path("provPerujuk").path("kode").asText());
+                namaPPK.setText(response.path("rujukan").path("provPerujuk").path("nama").asText());
+                // kodeDiagnosa.setText(response.path("rujukan").path("diagnosa").path("kode").asText());
+                // namaDiagnosa.setText(response.path("rujukan").path("diagnosa").path("nama").asText());
+                kodePoli.setText(response.path("rujukan").path("poliRujukan").path("kode").asText());
+                namaPoli.setText(response.path("rujukan").path("poliRujukan").path("nama").asText());
+                kodePoliRS = query.cariIsiSmc("select kd_poli_rs from maping_poli_bpjs where kd_poli_rs = ?", kodePoli.getText());
+                switch (response.path("rujukan").path("hakKelas").path("kode").asText()) {
+                    case "1": kelas.setSelectedIndex(0); break;
+                    case "2": kelas.setSelectedIndex(1); break;
+                    case "3": kelas.setSelectedIndex(2); break;
+                }
+                jenisPeserta.setText(response.path("rujukan").path("pasien").path("jenisPeserta").path("keterangan").asText());
+                jk.setText(response.path("rujukan").path("pasien").path("sex").asText());
+                _nik = response.path("rujukan").path("pasien").path("nik").asText().replace("null,", "");
+                if (_nik.isBlank()) _nik = query.cariIsiSmc("select no_ktp from pasien where no_rkm_medis = ?", noRM.getText());
+                nik.setText(_nik);
+                noKartu.setText(response.path("rujukan").path("pasien").path("noKartu").asText());
+                tglSEP.setDate(new Date());
+                tglRujuk.setSelectedItem(valid.SetTgl(response.path("rujukan").path("tglKunjungan").asText()));
+                _noTelp = response.path("rujukan").path("pasien").path("mr").path("noTelepon").asText().replace("null", "");
+                if (_noTelp.isBlank()) _noTelp = query.cariIsiSmc("select no_tlp from pasien where no_rkm_medis = ?", noRM.getText());
+                noTelp.setText(_noTelp);
+                prb = response.path("peserta").path("informasi").path("prolanisPRB").asText().replaceAll("null", "");
+            } else {
+                System.out.println("Notif : Tidak dapat menemukan rujukan dari FKTRL!");
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            if (e.toString().contains("UnknownHostException")) {
+                JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!!!");
+            }
+        }
+        return responseCode;
+    }
+    
+    public void tampilKontrol(String input) {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        labelTerapi.setVisible(false);
+        labelPoliTerapi.setVisible(false);
+        kodePoliTerapi.setVisible(false);
+        namaPoliTerapi.setVisible(false);
+        pilihPoliTerapi.setVisible(false);
+        labelDokterTerapi.setVisible(false);
+        kodeDokterTerapi.setVisible(false);
+        namaDokterTerapi.setVisible(false);
+        pilihDokterTerapi.setVisible(false);
+        String sql = "select bridging_surat_kontrol_bpjs.*, bridging_sep.no_rujukan, bridging_sep.no_kartu, bridging_sep.jnspelayanan, " +
+            "left(bridging_sep.asal_rujukan, 1) as asal_rujukan, bridging_sep.kdppkrujukan, bridging_sep.nmppkrujukan, bridging_sep.klsrawat " +
+            "from bridging_surat_kontrol_bpjs join bridging_sep on bridging_surat_kontrol_bpjs.no_sep = bridging_sep.no_sep " +
+            "where bridging_surat_kontrol_bpjs.no_surat = ?";
+        try (PreparedStatement ps = koneksi.prepareStatement(sql)) {
+            ps.setString(1, input);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    kodeDiagnosa.setText("Z09.8");
+                    namaDiagnosa.setText("Z09.8 - Follow-up examination after other treatment for other conditions");
+                    // POST RANAP
+                    if (rs.getString("jnspelayanan").equals("1")) {
+                        utc = api.getUTCDateTime();
+                        url = koneksiDB.URLAPIBPJS() + "/Peserta/nokartu/" + rs.getString("no_kartu") + "/tglSEP/" + valid.setTglSmc(tglSEP);
+                        headers = new HttpHeaders();
+                        headers.setContentType(MediaType.APPLICATION_JSON);
+                        headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
+                        headers.add("X-Timestamp", utc);
+                        headers.add("X-Signature", api.getHmac(utc));
+                        headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
+                        entity = new HttpEntity(headers);
+                        root = mapper.readTree(api.getRest().exchange(url, HttpMethod.GET, entity, String.class).getBody());
+                        metaData = root.path("metaData");
+                        if (metaData.path("code").asText().equals("200")) {
+                            asalRujukan.setSelectedIndex(1);
+                            jenisPelayanan.setSelectedIndex(1);
+                            response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
+                            noRM.setText(query.cariIsiSmc("select no_rkm_medis from pasien where no_peserta = ?", rs.getString("no_kartu")));
+                            namaPasien.setText(response.path("peserta").path("nama").asText());
+                            tglLahir.setText(valid.SetTgl(response.path("peserta").path("tglLahir").asText()));
+                            statusPeserta.setText(response.path("peserta").path("statusPeserta").path("kode").asText() + ". " + response.path("peserta").path("statusPeserta").path("keterangan").asText());
+                            noSuratKontrol.setText(rs.getString("no_surat"));
+                            noRujukan.setText(rs.getString("no_sep"));
+                            kodePPK.setText(kodePPKPelayanan.getText());
+                            namaPPK.setText(namaPPKPelayanan.getText());
+                            kodePoli.setText(rs.getString("kd_poli_bpjs"));
+                            namaPoli.setText(rs.getString("nm_poli_bpjs"));
+                            kodePoliRS = query.cariIsiSmc("select kd_poli_rs from maping_poli_bpjs where kd_poli_bpjs = ?", rs.getString("kd_poli_bpjs"));
+                            kodeDokter.setText(rs.getString("kd_dokter_bpjs"));
+                            namaDokter.setText(rs.getString("nm_dokter_bpjs"));
+                            kodeDokterRS = query.cariIsiSmc("select kd_dokter from maping_dokter_dpjpvclaim where kd_dokter_rs = ?", rs.getString("kd_dokter_bpjs"));
+                            tujuanKunjungan.setSelectedIndex(2);
+                            flagProsedur.setSelectedIndex(0);
+                            penunjang.setSelectedIndex(0);
+                            asesmenPelayanan.setSelectedIndex(5);
+                            switch (rs.getString("klsrawat")) {
+                                case "1": kelas.setSelectedIndex(0); break;
+                                case "2": kelas.setSelectedIndex(1); break;
+                                case "3": kelas.setSelectedIndex(2); break;
+                            }
+                            jenisPeserta.setText(response.path("peserta").path("jenisPeserta").path("keterangan").asText());
+                            jk.setText(response.path("peserta").path("sex").asText());
+                            _nik = response.path("peserta").path("nik").asText().replace("null,", "");
+                            if (_nik.isBlank()) _nik = query.cariIsiSmc("select no_ktp from pasien where no_rkm_medis = ?", noRM.getText());
+                            nik.setText(_nik);
+                            noKartu.setText(response.path("peserta").path("noKartu").asText());
+                            tglSEP.setDate(new Date());
+                            tglRujuk.setDate(new Date());
+                            _noTelp = response.path("peserta").path("mr").path("noTelepon").asText().replace("null", "");
+                            if (_noTelp.isBlank()) _noTelp = query.cariIsiSmc("select no_tlp from pasien where no_rkm_medis = ?", noRM.getText());
+                            noTelp.setText(_noTelp);
+                            prb = response.path("peserta").path("informasi").path("prolanisPRB").asText().replaceAll("null", "");
+                        }
+                    } else if (rs.getString("jnspelaynan").equals("2")) {
+                        String responseCode = this.tampilNoRujukanFKTP(rs.getString("no_rujukan"));
+                        if (! responseCode.equals("200")) {
+                            responseCode = this.tampilNoRujukanFKTRL(rs.getString("no_rujukan"));
+                        }
+                        if (! responseCode.equals("200")) {
+                            JOptionPane.showMessageDialog(rootPane, "Tidak dapat menemukan asal rujukan pasien...!!!\nSilahkan hubungi administrasi.");
+                            resetInput();
+                        }
+                        kodeDiagnosa.setText("Z09.8");
+                        namaDiagnosa.setText("Z09.8 - Follow-up examination after other treatment for other conditions");
+                        tujuanKunjungan.setSelectedIndex(2);
+                        flagProsedur.setSelectedIndex(0);
+                        penunjang.setSelectedIndex(0);
+                        asesmenPelayanan.setSelectedIndex(5);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "No. SKDP tidak ditemukan!\nSilahkan hubungi administrasi.");
+                    resetInput();
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                JOptionPane.showMessageDialog(rootPane, "Terjadi kesalahan pada saat mencari SKDP Pasien!\nSilahkan hubungi administrasi.");
+                resetInput();
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            JOptionPane.showMessageDialog(rootPane, "Terjadi kesalahan pada saat mencari SKDP Pasien!\nSilahkan hubungi administrasi.");
+            resetInput();
+        }
+            
         
         utc = api.getUTCDateTime();
         url = koneksiDB.URLAPIBPJS() + "/RencanaKontrol/noSuratKontrol/" + input;
@@ -3456,7 +3673,20 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
             metaData = root.path("metaData");
             if (metaData.path("code").asText().equals("200")) {
                 response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
+                try (PreparedStatement ps = koneksi.prepareStatement("")) {
+                    
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) {
+                            
+                        }
+                    } catch (Exception e) { 
+                        System.out.println("Notif : " + e);
+                    }
+                } catch (Exception e) { 
+                    System.out.println("Notif : " + e);
+                }
                 
+                noSuratKontrol.setText(response.path("noSuratKontrol").asText());
                 
                 // TODO: gunakan endpoint ini
                 // koneksiDB.URLAPIBPJS() + "/RencanaKontrol/noSuratKontrol/" + input
@@ -3575,7 +3805,7 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
         
         this.setCursor(Cursor.getDefaultCursor());
     }
-
+    
     private void autonomor() {
         switch (koneksiDB.URUTNOREG()) {
             case "dokter":
@@ -3763,7 +3993,11 @@ public class DlgRegistrasiSEPPertama extends javax.swing.JDialog {
     }
     
     private void updateDataPasien() {
-        //
+        query.mengupdateSmc("pasien",
+            "no_tlp = ?, umur = concat(concat(concat(timestampdiff(year, tgl_lahir, curdate()), ' Th '), concat(timestampdiff(month, tgl_lahir, curdate()) - ((timestampdiff(month, tgl_lahir, curdate()) div 12) * 12), ' Bl ')), concat(timestampdiff(day, date_add(date_add(tgl_lahir, interval timestampdiff(year, tgl_lahir, curdate()) year), interval timestampdiff(month, tgl_lahir, curdate()) - ((timestampdiff(month, tgl_lahir, curdate()) div 12) * 12) month), curdate()), ' Hr'))",
+            "no_rkm_medis = ?",
+            noTelp.getText(), noRM.getText()
+        );
     }
     
     private void simpanAntrianOnsite() {

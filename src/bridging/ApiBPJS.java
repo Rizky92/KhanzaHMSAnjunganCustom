@@ -104,4 +104,20 @@ public class ApiBPJS {
         return new RestTemplate(factory);
     }
 
+    public String getUTCTimestamp() {
+        millis = System.currentTimeMillis();
+        return String.valueOf(millis / 1000);
+    }
+    
+    public String getHmac() {
+        String utc = String.valueOf(millis / 1000);
+        salt = Consid + "&" + utc;
+        generateHmacSHA256Signature = null;
+        try {
+            generateHmacSHA256Signature = generateHmacSHA256Signature(salt,Key);
+        } catch (GeneralSecurityException e) {
+            System.out.println("Error Signature : " + e);
+        }
+        return generateHmacSHA256Signature;
+    }
 }

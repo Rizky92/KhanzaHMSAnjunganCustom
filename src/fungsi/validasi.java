@@ -32,9 +32,6 @@ import javax.print.PrintServiceLookup;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.standard.Copies;
-import javax.print.attribute.standard.MediaPrintableArea;
-import javax.print.attribute.standard.MediaSize;
-import javax.print.attribute.standard.MediaSizeName;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -63,6 +60,7 @@ import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimplePrintServiceExporterConfiguration;
 import net.sf.jasperreports.view.JasperViewer;
 import uz.ncipro.calendar.JDateTimePicker;
+import widget.Tanggal;
 
 /**
  *
@@ -90,6 +88,10 @@ public final class validasi {
 
     public validasi() {
         super();
+    }
+    
+    public String setTglSmc(Tanggal tgl) {
+        return new SimpleDateFormat("yyyy-MM-dd").format(tgl.getDate());
     }
     
     public void printReport(String namaReport, String namaPrinter, String judul, int jumlah, Map params) {

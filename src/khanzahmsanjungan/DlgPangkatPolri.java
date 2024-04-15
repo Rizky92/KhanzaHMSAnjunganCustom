@@ -12,7 +12,7 @@
 package khanzahmsanjungan;
 
 import fungsi.WarnaTable;
-import fungsi.batasInput;
+import fungsi.BatasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
@@ -71,8 +71,8 @@ public class DlgPangkatPolri extends javax.swing.JDialog {
         }
 
         tbkecamatan.setDefaultRenderer(Object.class, new WarnaTable());
-        Nama.setDocument(new batasInput((byte)30).getKata(Nama));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+        Nama.setDocument(new BatasInput((byte)30).getKata(Nama));
+        TCari.setDocument(new BatasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override

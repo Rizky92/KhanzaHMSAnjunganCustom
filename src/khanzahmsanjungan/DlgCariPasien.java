@@ -12,7 +12,7 @@
 package khanzahmsanjungan;
 
 import fungsi.WarnaTable;
-import fungsi.batasInput;
+import fungsi.BatasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
@@ -160,7 +160,7 @@ public class DlgCariPasien extends javax.swing.JDialog {
         }
         tbPasien.setDefaultRenderer(Object.class, new WarnaTable());
 
-        TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
+        TCari.setDocument(new BatasInput((byte) 100).getKata(TCari));
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
                 @Override

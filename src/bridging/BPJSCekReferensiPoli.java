@@ -15,7 +15,7 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
-import fungsi.batasInput;
+import fungsi.BatasInput;
 import fungsi.koneksiDB;
 import java.awt.Dimension;
 import javax.swing.JTable;
@@ -84,7 +84,7 @@ public final class BPJSCekReferensiPoli extends javax.swing.JDialog {
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         
-        Poli.setDocument(new batasInput((byte)100).getKata(Poli));
+        Poli.setDocument(new BatasInput((byte)100).getKata(Poli));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){
             Poli.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){

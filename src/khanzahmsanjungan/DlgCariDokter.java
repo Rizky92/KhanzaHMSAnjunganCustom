@@ -13,7 +13,7 @@ package khanzahmsanjungan;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
-import fungsi.batasInput;
+import fungsi.BatasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
 import fungsi.akses;
@@ -105,7 +105,7 @@ public final class DlgCariDokter extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
+        TCari.setDocument(new BatasInput((byte) 100).getKata(TCari));
 
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {

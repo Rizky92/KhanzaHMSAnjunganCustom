@@ -14,7 +14,7 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
-import fungsi.batasInput;
+import fungsi.BatasInput;
 import fungsi.koneksiDB;
 import java.awt.Dimension;
 import javax.swing.JTable;
@@ -89,7 +89,7 @@ public final class BPJSCekReferensiPenyakit extends javax.swing.JDialog {
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
 
-        diagnosa.setDocument(new batasInput((byte) 100).getKata(diagnosa));
+        diagnosa.setDocument(new BatasInput((byte) 100).getKata(diagnosa));
 
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             diagnosa.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {

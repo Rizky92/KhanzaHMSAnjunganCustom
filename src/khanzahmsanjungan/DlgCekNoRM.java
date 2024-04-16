@@ -500,14 +500,14 @@ public class DlgCekNoRM extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             if (Sequel.cariInteger("select count(pasien.no_rkm_medis) from pasien where pasien.no_rkm_medis='" + NoRMPasien.getText() + "'") == 1) {
                 DlgRegistrasiWalkIn form = new DlgRegistrasiWalkIn(null, true);
-                form.setPasien(NoRMPasien.getText());
+                form.tampil(NoRMPasien.getText());
                 form.setSize(this.getWidth(), this.getHeight());
                 form.setLocationRelativeTo(jPanel1);
                 this.dispose();
                 form.setVisible(true);
             } else if (Sequel.cariInteger("select count(pasien.no_ktp) from pasien where pasien.no_ktp='" + NoRMPasien.getText() + "'") == 1) {
                 DlgRegistrasiWalkIn form = new DlgRegistrasiWalkIn(null, true);
-                form.setPasien(Sequel.cariIsi("select pasien.no_rkm_medis from pasien where pasien.no_ktp='" + NoRMPasien.getText() + "'"));
+                form.tampil(Sequel.cariIsi("select pasien.no_rkm_medis from pasien where pasien.no_ktp='" + NoRMPasien.getText() + "'"));
                 form.setSize(this.getWidth(), this.getHeight());
                 form.setLocationRelativeTo(jPanel1);
                 this.dispose();
@@ -530,14 +530,14 @@ public class DlgCekNoRM extends javax.swing.JDialog {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if (Sequel.cariInteger("select count(pasien.no_rkm_medis) from pasien where pasien.no_rkm_medis='" + NoRMPasien.getText() + "'") == 1) {
             DlgRegistrasiWalkIn form = new DlgRegistrasiWalkIn(null, true);
-            form.setPasien(NoRMPasien.getText());
+            form.tampil(NoRMPasien.getText());
             form.setSize(this.getWidth(), this.getHeight());
             form.setLocationRelativeTo(jPanel1);
             this.dispose();
             form.setVisible(true);
         } else if (Sequel.cariInteger("select count(pasien.no_ktp) from pasien where pasien.no_ktp='" + NoRMPasien.getText() + "'") == 1) {
             DlgRegistrasiWalkIn form = new DlgRegistrasiWalkIn(null, true);
-            form.setPasien(Sequel.cariIsi("select pasien.no_rkm_medis from pasien where pasien.no_ktp='" + NoRMPasien.getText() + "'"));
+            form.tampil(Sequel.cariIsi("select pasien.no_rkm_medis from pasien where pasien.no_ktp='" + NoRMPasien.getText() + "'"));
             form.setSize(this.getWidth(), this.getHeight());
             form.setLocationRelativeTo(jPanel1);
             this.dispose();
